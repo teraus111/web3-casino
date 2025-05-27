@@ -1,4 +1,4 @@
-import HexagonSvg from "../assets/img/hexagon.svg"
+
 
 
 
@@ -15,22 +15,22 @@ const getImage = (hex: string) => {
     const img = new Image();
     switch (hex) {
         case "hex-dark":
-            img.src = "/assets/img/hex-dark.webp";
+            img.src = "/assets/image/hex-dark.webp";
             return img;
         case "hex-white":
-            img.src = "/assets/img/hex-white.webp";
+            img.src = "/assets/image/hex-white.webp";
             return img;
         case "hex-blue":
-            img.src = "/assets/img/hex-blue.webp";
+            img.src = "/assets/image/hex-blue.webp";
             return img;
         case "hex-orange":
-            img.src = "/assets/img/hex-orange.webp";
+            img.src = "/assets/image/hex-orange.webp";
             return img;
         case "hex-green":
-            img.src = "/assets/img/hex-green.webp";
+            img.src = "/assets/image/hex-green.webp";
             return img;
         case "hex-diamond":
-            img.src = "/assets/img/hex-diamond.webp";
+            img.src = "/assets/image/hex-diamond.webp";
             return img;
     }
     return img
@@ -273,7 +273,7 @@ const Slider: React.FC<SliderProps> = ({ multiplier, elapsedTime, numbers = [] }
                                 }}
                             >
                                 <div className="relative flex justify-center items-center p-3">
-                                    <img src={HexagonSvg} alt="hex" />
+                                    <img src={`/assets/image/hexagon.svg`} alt="hex" />
                                     {(animationEnded && isCrashedpoint) && <Effect color={tile} />}
                                     <div
                                         className="absolute top-1/2 left-1/2 text-[1rem] text-white transform -translate-x-1/2 -translate-y-1/2"
@@ -289,7 +289,7 @@ const Slider: React.FC<SliderProps> = ({ multiplier, elapsedTime, numbers = [] }
                     )
                 })}
             </div>
-            <div className="absolute left-1/2 bottom-20 rounded-full h-1/4 border-l-2 border-white transform -translate-x-1/2 pointer-events-none"></div>
+            <div className="absolute left-1/2 bottom-20 rounded-full h-1/3 border-l-2 border-white transform -translate-x-1/2 pointer-events-none"></div>
             <div className="w-3 h-3 rounded-full bg-white absolute left-1/2 bottom-20 -translate-x-1/2" />
         </div>
     );

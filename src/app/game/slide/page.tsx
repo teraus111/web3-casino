@@ -1,3 +1,4 @@
+"use client"
 import { useCallback, useEffect, useRef, useState } from "react";
 import io, { Socket } from "socket.io-client";
 
@@ -10,6 +11,7 @@ import { Button } from "@heroui/react";
 import MultiPlierInput from "@/components/MultiplierInput";
 import CurrentBets from "@/components/CurrentBets";
 import Slider, { findTile } from "@/components/Slider";
+import Layout from "@/layout/layout";
 const socket: Socket = io(`${API_URL}/slide`);
 
 const betAudio = new Audio();
@@ -432,102 +434,105 @@ const SlideGame = () => {
         setAutobet(activeTab == 1)
     }, [activeTab])
 
-    return <div className="w-full bg-[#10100f] h-full flex justify-center ">
-        <div className={`max-w-[1300px] mt-5 ${isMobile ? "w-full p-1" : ""} `}>
-            <div className="grid grid-cols-1 sm:grid-cols-4 rounded-md overflow-hidden  bg-panel border-[1px] border-[#020202bb]  shadow-md">
-                {!isMobile &&
-                    <div className="col-span-1 p-2 min-h-[560px] bg-sider_panel shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between">
-                        <SwitchTab onChange={setActiveTab} active={activeTab} disabled={disable} />
-                        <AmountInput onChange={setBetAmount} value={betAmount} disabled={disable} />
-                        <MultiPlierInput onChange={setTarget} value={target} disabled={disable} />
-                        <Button disabled={disable} onPress={() => {
-                            if (betting || inputDisable.current)
-                                return;
-                            if (status === STATUS.PLAYING) {
-                                if (planedbet) {
-                                    savedBet.current = undefined;
-                                    setPlanedBet(false);
-                                } else {
-                                    createbet();
-                                }
-                            } else if (status === STATUS.BETTING) {
-                                createbet();
-                            }
-                        }}>{
-                                getButtonContent()
-                            }</Button>
-                        <CurrentBets bets={bets.map((b) => {
-                            if (status === STATUS.PLAYING) {
-                                return { ...b, isWinner: false }
-                            } else {
-                                return { ...b, isWinner: result.multiplier > b.target }
-                            }
-                        })} />
-                    </div>
-                }
-                <div className={`col-span-3  gap-2 ${isMobile ? "min-h-[350px] " : "min-h-[300px] "
-                    }   relative h-full overflow-hidden`}>
-                    <div className="flex absolute right-1/2 translate-x-1/2 top-5 z-20 w-[300px] space-x-1">
-                        {history.slice(history.length - 10, history.length).map((h: any, index) => {
-                            return <Button onClick={() => { }}
-                                className="p-[3px] w-10  text-sm font-medium text-white"
-                                key={index}
-                                style={{
-                                    background: findTile(h.resultpoint).color,
-                                    color: findTile(h.resultpoint).text
-                                }}>
-                                {h.resultpoint}x
-                            </Button>
-                        })}
-                        <Button onClick={() => { }} className="p-[3px] w-10 text-sm font-medium text-white" style={{ background: "#50e3c2" }}>Fairness</Button>
-                    </div>
-                    <div className="w-full h-full flex items-center" >
-                        <Slider multiplier={result.multiplier} elapsedTime={elapsedTime} numbers={result.numbers} />
-                    </div>
-                    <div className="absolute bottom-10 left-5 z-20">
-                        <div className="flex space-x-1 w-20 items-center">
-                            <div className="w-3 h-3 rounded-full bg-bet_button"></div>
-                            <div className="text-white text-sm">Bets: {bets.length}</div>
+    return (
+        <Layout>
+            <div className={`max-w-[1300px] ${isMobile ? "w-full p-1" : ""} `}>
+                <div className="grid grid-cols-1 sm:grid-cols-4 rounded-md overflow-hidden  bg-panel border-[1px] border-[#020202bb]  shadow-md h-full">
+                    <div className="col-span-3 flex items-center justify-center">
+                        <div className={`  gap-2 ${isMobile ? "min-h-[350px] " : "min-h-[300px] "
+                            }   relative h-full overflow-hidden flex items-center justify-center`}>
+                            <div className="flex absolute right-1/2 translate-x-1/2 top-5 z-20 w-[300px] space-x-1">
+                                {history.slice(history.length - 10, history.length).map((h: any, index) => {
+                                    return <Button onClick={() => { }}
+                                        className="p-[3px] w-10  text-sm font-medium text-white"
+                                        key={index}
+                                        style={{
+                                            background: findTile(h.resultpoint).color,
+                                            color: findTile(h.resultpoint).text
+                                        }}>
+                                        {h.resultpoint}x
+                                    </Button>
+                                })}
+                                <Button onClick={() => { }} className="p-[3px] w-10 text-sm font-medium text-white" style={{ background: "#50e3c2" }}>Fairness</Button>
+                            </div>
+                            <div className="w-full h-full flex items-center" >
+                                <Slider multiplier={result.multiplier} elapsedTime={elapsedTime} numbers={result.numbers} />
+                            </div>
+                            <div className="absolute bottom-10 left-5 z-20">
+                                <div className="flex space-x-1 w-20 items-center">
+                                    <div className="w-3 h-3 rounded-full bg-bet_button"></div>
+                                    <div className="text-white text-sm">Bets: {bets.length}</div>
+                                </div>
+                            </div>
+                            <div className="w-full absolute bottom-0 z-20">
+                                <StatusBar status={status} />
+                            </div>
+                            <div className="absolute z-10 top-0 left-0 w-full h-full" style={{ background: "linear-gradient(90deg,#071824,transparent,#071824)" }} />
                         </div>
                     </div>
-                    <div className="w-full absolute bottom-0 z-20">
-                        <StatusBar status={status} />
-                    </div>
-                    <div className="absolute z-10 top-0 left-0 w-full h-full" style={{ background: "linear-gradient(90deg,#071824,transparent,#071824)" }} />
-                </div>
-
-                {isMobile &&
-                    <div className="col-span-1 p-2 min-h-[560px] bg-sider_panel shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between">
-                        <Button disabled={disable} onClick={() => {
-                            if (betting || inputDisable.current)
-                                return;
-                            if (status === STATUS.PLAYING) {
-                                if (planedbet) {
-                                    savedBet.current = undefined;
-                                    setPlanedBet(false);
-                                } else {
+                    {isMobile &&
+                        <div className="col-span-1 p-2 min-h-[560px] bg-sider_panel shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between">
+                            <Button disabled={disable} onClick={() => {
+                                if (betting || inputDisable.current)
+                                    return;
+                                if (status === STATUS.PLAYING) {
+                                    if (planedbet) {
+                                        savedBet.current = undefined;
+                                        setPlanedBet(false);
+                                    } else {
+                                        createbet();
+                                    }
+                                } else if (status === STATUS.BETTING) {
                                     createbet();
                                 }
-                            } else if (status === STATUS.BETTING) {
-                                createbet();
-                            }
-                        }}>{getButtonContent()}
-                        </Button>
-                        <AmountInput onChange={setBetAmount} value={betAmount} disabled={disable} />
-                        <MultiPlierInput onChange={setTarget} value={target} disabled={disable} />
-                        <SwitchTab onChange={setActiveTab} active={activeTab} disabled={disable} />
-                        <CurrentBets bets={bets.map((b) => {
-                            if (status === STATUS.PLAYING) {
-                                return { ...b, isWinner: false }
-                            } else {
-                                return { ...b, isWinner: result.multiplier > b.target }
-                            }
-                        })} />
-                    </div>
-                }
+                            }}>{getButtonContent()}
+                            </Button>
+                            <AmountInput onChange={setBetAmount} value={betAmount} disabled={disable} />
+                            <MultiPlierInput onChange={setTarget} value={target} disabled={disable} />
+                            <SwitchTab onChange={setActiveTab} active={activeTab} disabled={disable} />
+                            <CurrentBets bets={bets.map((b) => {
+                                if (status === STATUS.PLAYING) {
+                                    return { ...b, isWinner: false }
+                                } else {
+                                    return { ...b, isWinner: result.multiplier > b.target }
+                                }
+                            })} />
+                        </div>
+                    }
+                    {!isMobile &&
+                        <div className="col-span-1 p-2 min-h-[560px] bg-sider_panel shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col gap-4">
+                            <SwitchTab onChange={setActiveTab} active={activeTab} disabled={disable} />
+                            <AmountInput onChange={setBetAmount} value={betAmount} disabled={disable} />
+                            <MultiPlierInput onChange={setTarget} value={target} disabled={disable} />
+                            <Button className="bg-[#00e701] hover:bg-[#00d600] rounded-full uppercase font-bold" disabled={disable} onPress={() => {
+                                if (betting || inputDisable.current)
+                                    return;
+                                if (status === STATUS.PLAYING) {
+                                    if (planedbet) {
+                                        savedBet.current = undefined;
+                                        setPlanedBet(false);
+                                    } else {
+                                        createbet();
+                                    }
+                                } else if (status === STATUS.BETTING) {
+                                    createbet();
+                                }
+                            }}>{
+                                    getButtonContent()
+                                }</Button>
+                            <CurrentBets bets={bets.map((b) => {
+                                if (status === STATUS.PLAYING) {
+                                    return { ...b, isWinner: false }
+                                } else {
+                                    return { ...b, isWinner: result.multiplier > b.target }
+                                }
+                            })} />
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    </div>
+        </Layout>
+    )
 }
 
 export default SlideGame;

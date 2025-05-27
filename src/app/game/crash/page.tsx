@@ -597,7 +597,7 @@ const CrashGame = () => {
                                     />
 
                                     {isAuto ? (
-                                        <Button
+                                        <Button className="bg-[#00e701] hover:bg-[#00d600] font-bold uppercase rounded-full"
                                             disabled={
                                                 betting &&
                                                 gameState !== GAME_STATES.InProgress &&
@@ -633,6 +633,7 @@ const CrashGame = () => {
                                         </Button>
                                     ) : (
                                         <Button
+                                            className="bg-[#00e701] hover:bg-[#00d600] font-bold uppercase rounded-full"
                                             disabled={joining}
                                             onClick={() => {
                                                 if (!betting) {
