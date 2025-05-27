@@ -13,7 +13,7 @@ const ProfitAmount: React.FC<props> = ({ disabled, multiplier, profit, icon }) =
             Total profit {`(${multiplier})x`}
         </p>
         <div
-            className={`flex w-full items-center  border-[2px] border-[#2f4553] hover:border-[#557086] ${disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
+            className={`rounded-full flex w-full items-center  border-[2px] border-[#2f4553] hover:border-[#557086] ${disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
                 } rounded p-1.5`}
         >
             <input

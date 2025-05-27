@@ -11,8 +11,17 @@ module.exports = {
       backgroundImage: {
         'board': "url('/assets/image/bg/bg_board.png')",
         'navbar': "url('/assets/image/bg/bg_navbar.png')",
+      },
+      colors:{
+        dark:{
+          900:"#030612",
+          600:"#0e141d",
+          500:"#141923"
+        }
       }
+      
     },
+
   },
   darkMode: "class",
   plugins: [heroui()],

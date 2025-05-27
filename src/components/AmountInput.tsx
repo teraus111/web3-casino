@@ -13,7 +13,7 @@ const AmountInput: React.FC<props> = ({ onChange, disabled, value, className, la
                 ${amount || 0}
             </div>
         </div>
-        <div className={`flex bg-input_bg rounded overflow-hidden shadow-input ${className}`}>
+        <div className={` flex bg-input_bg rounded-full overflow-hidden text-white shadow-input ${className}`}>
             <Input onChange={(e: number) => onChange(e)} value={value} disabled={disabled} type="number" icon={<CurrencyIcon />} />
             <div className="flex relative">
                 <button

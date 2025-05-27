@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react';
 
 // Define the type for the hook's return value

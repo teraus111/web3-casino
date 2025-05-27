@@ -9,67 +9,69 @@ import ProfitAmount from "@/components/ProfitAmount";
 import { BombSvg, EthSvg } from "@/components/svgs";
 import SwitchTab from "@/components/SwitchTab";
 import useIsMobile from "@/hooks/useIsMobile";
-import axios from "axios";
+import Layout from "@/layout/layout";
+import axiosServices from "@/util/axios";
+import { Button, Switch } from "@heroui/react";
 import { useEffect, useRef, useState } from "react";
 export const MINE_API = "/mine";
 
 function calculateMinesGame(mines: number, picks: number, bet: number): any {
-  const totalSlots = 25; // Total number of slots
-  const safeSlots = totalSlots - mines; // Slots without mines
+    const totalSlots = 25; // Total number of slots
+    const safeSlots = totalSlots - mines; // Slots without mines
 
-  // Function to calculate factorial
-  function factorial(n: number): number {
-    let value = 1;
-    for (let i = 2; i <= n; i++) {
-      value *= i;
+    // Function to calculate factorial
+    function factorial(n: number): number {
+        let value = 1;
+        for (let i = 2; i <= n; i++) {
+            value *= i;
+        }
+        return value;
     }
-    return value;
-  }
 
-  // Function to calculate combinations
-  function combination(n: number, k: number): number {
-    if (k > n) return 0;
-    return factorial(n) / (factorial(k) * factorial(n - k));
-  }
-
-  // Calculate total combinations and safe combinations
-  const totalCombinations = combination(totalSlots, picks);
-  const safeCombinations = combination(safeSlots, picks);
-
-  // Calculate probability and other metrics
-  let probability = 0.99 * (totalCombinations / safeCombinations);
-  probability = Math.round(probability * 100) / 100;
-
-  const winAmount = bet * probability;
-  const roundedWinAmount = Math.round(winAmount * 100000000) / 100000000;
-
-  const lossAmount = 100 / (probability - 1);
-  const roundedLossAmount = Math.round(lossAmount * 100) / 100;
-
-  const chance = 99 / probability;
-  const roundedChance = Math.round(chance * 100000) / 100000;
-
-  // Log results if conditions are met
-  if (mines + picks <= totalSlots && picks > 0 && mines > 0) {
-    if (mines && picks) {
-      return {
-        probability,
-        roundedLossAmount,
-        roundedChance,
-        roundedWinAmount,
-      };
-      // console.log("Probability:", probability);
-      // console.log("Loss:", roundedLossAmount);
-      // console.log("Chance:", roundedChance);
-      // if (bet > 0.00000000999) console.log("Win:", roundedWinAmount);
+    // Function to calculate combinations
+    function combination(n: number, k: number): number {
+        if (k > n) return 0;
+        return factorial(n) / (factorial(k) * factorial(n - k));
     }
-  }
-  return {
-    probability: 0,
-    roundedLossAmount: 0,
-    roundedChance: 0,
-    roundedWinAmount: 0,
-  };
+
+    // Calculate total combinations and safe combinations
+    const totalCombinations = combination(totalSlots, picks);
+    const safeCombinations = combination(safeSlots, picks);
+
+    // Calculate probability and other metrics
+    let probability = 0.99 * (totalCombinations / safeCombinations);
+    probability = Math.round(probability * 100) / 100;
+
+    const winAmount = bet * probability;
+    const roundedWinAmount = Math.round(winAmount * 100000000) / 100000000;
+
+    const lossAmount = 100 / (probability - 1);
+    const roundedLossAmount = Math.round(lossAmount * 100) / 100;
+
+    const chance = 99 / probability;
+    const roundedChance = Math.round(chance * 100000) / 100000;
+
+    // Log results if conditions are met
+    if (mines + picks <= totalSlots && picks > 0 && mines > 0) {
+        if (mines && picks) {
+            return {
+                probability,
+                roundedLossAmount,
+                roundedChance,
+                roundedWinAmount,
+            };
+            // console.log("Probability:", probability);
+            // console.log("Loss:", roundedLossAmount);
+            // console.log("Chance:", roundedChance);
+            // if (bet > 0.00000000999) console.log("Win:", roundedWinAmount);
+        }
+    }
+    return {
+        probability: 0,
+        roundedLossAmount: 0,
+        roundedChance: 0,
+        roundedWinAmount: 0,
+    };
 }
 
 const MineGame: React.FC = () => {
@@ -120,7 +122,7 @@ const MineGame: React.FC = () => {
 
     const checkActiveGame = async () => {
         try {
-            const { data } = await axios.post(`${MINE_API}/status`);
+            const { data } = await axiosServices.post(`${MINE_API}/status`);
             if (data.success) {
                 const { datas, amount, mines } = data;
                 setStatus(GAME_STATUS.LIVE);
@@ -138,7 +140,7 @@ const MineGame: React.FC = () => {
         resetGame();
         setLoading(true);
         try {
-            const { data } = await axios.post(`${MINE_API}/create`, {
+            const { data } = await axiosServices.post(`${MINE_API}/create`, {
                 mines: mineCount,
                 amount: betAmount,
             });
@@ -173,7 +175,7 @@ const MineGame: React.FC = () => {
         setMineAreas((prev) => [...prev, { point, mine: null, mined: false }]);
 
         try {
-            const { data } = await axios.post(`${MINE_API}/bet`, { point });
+            const { data } = await axiosServices.post(`${MINE_API}/bet`, { point });
             if (data.status === "BET") {
                 setMineAreas((prev) =>
                     prev.map((m) =>
@@ -209,7 +211,7 @@ const MineGame: React.FC = () => {
             return;
         setLoading(true);
         try {
-            const { data } = await axios.post(`${MINE_API}/cashout`);
+            const { data } = await axiosServices.post(`${MINE_API}/cashout`);
             if (data.status === "END") {
                 setResult({
                     odds: profitAndOdds.probability,
@@ -286,7 +288,7 @@ const MineGame: React.FC = () => {
         setMineAreas([...autoAreas]);
 
         try {
-            const { data } = await axios.post(`${MINE_API}/autobet`, {
+            const { data } = await axiosServices.post(`${MINE_API}/autobet`, {
                 points: autoAreas.map((a) => a.point),
                 mines: mineCount,
                 amount: betAmount,
@@ -393,7 +395,7 @@ const MineGame: React.FC = () => {
             </p>
             <div
                 className={`flex items-center p-1.5 ${disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
-                    } rounded border-[2px] border-[#2f4553] hover:border-[#557086]`}
+                    } rounded-full border-[2px] border-[#2f4553] hover:border-[#557086]`}
             >
                 <div className="px-4 w-[10px] text-white">{mineCount}</div>
                 <input
@@ -447,12 +449,13 @@ const MineGame: React.FC = () => {
     // Render pick random tile button
     const renderRandomPickBtn = () => (
         <div className="mt-3 w-full">
-            <button
-                onClick={randomBet}
-                className="bg-[#2f4553] w-full hover:bg-[#496170] text-white font-bold py-2 px-4 rounded"
+            <Button
+                onPress={randomBet}
+                className=" w-full  font-bold py-2 px-4 rounded-full"
+                color="default"
             >
                 Pick random tile
-            </button>
+            </Button>
         </div>
     );
 
@@ -462,9 +465,9 @@ const MineGame: React.FC = () => {
             (!isAuto && loading) || (isAuto && autoAreas.length == 0);
         return (
             <div className="mt-3 w-full">
-                <button
+                <Button
                     disabled={disabledbtn}
-                    onClick={() => {
+                    onPress={() => {
                         if (!isAuto) {
                             if (!loading) {
                                 if (status === GAME_STATUS.LIVE) {
@@ -484,7 +487,7 @@ const MineGame: React.FC = () => {
                         }
                     }}
                     className={`${disabledbtn ? "bg-[#178317]" : "bg-[#00e701] hover:bg-[#00d600]"
-                        } text-black font-bold py-2 px-4 rounded w-full flex  justify-center text-center`}
+                        } text-black font-bold py-2 px-4 rounded-full w-full flex  justify-center text-center`}
                 >
                     <div className="flex text-nowrap">
                         {status === GAME_STATUS.LIVE
@@ -500,7 +503,7 @@ const MineGame: React.FC = () => {
                             </div>
                         )}
                     </div>
-                </button>
+                </Button>
             </div>
         );
     };
@@ -512,7 +515,7 @@ const MineGame: React.FC = () => {
             </p>
             <div
                 className={`flex w-full items-center  border-[2px] border-[#2f4553] hover:border-[#557086] ${disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
-                    } rounded p-1.5`}
+                    } rounded-full p-1.5`}
             >
                 <input
                     disabled={disabled}
@@ -537,7 +540,7 @@ const MineGame: React.FC = () => {
             </p>
             <div
                 className={`flex w-full items-center  border-[2px] border-[#2f4553] hover:border-[#557086] ${disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
-                    } rounded p-1.5`}
+                    } rounded-full p-1.5`}
             >
                 <input
                     disabled={disabled}
@@ -556,16 +559,104 @@ const MineGame: React.FC = () => {
     );
 
     return (
-        <div className="flex w-full justify-center mt-5 items-center">
-            <div
-                className={` ${isMobile ? "flex flex-col  items-center" : "flex"
-                    } bg-[#0f212e] w-full max-w-[1300px] rounded-md overflow-hidden`}
-            >
-                {!isMobile && (
-                    <div className={`w-[300px]  bg-[#213743] p-2`}>
-                        {isAuto ? (
-                            <div className="flex flex-col">
-                                <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
+        <Layout>
+            <div className="flex w-full justify-center">
+                <div
+                    className={` ${isMobile ? "flex flex-col  items-center" : "flex"
+                        } w-full rounded-md overflow-hidden`}
+                >
+                    {/* Main content */}
+                    <div className="flex items-center w-full">
+                        <div
+                            className={`${isMobile ? "w-11/12" : "w-[500px] xl:w-[630px]  p-5"} mx-auto relative`}
+                        >
+                            <div
+                                className={`grid grid-cols-5 gap-2.5 p-1.5 ${!areaFlag ? "animate-bounding2" : ""
+                                    } `}>
+                                {[...Array(25)].map((_, index) => {
+                                    const mine = mineAreas.find((m) => m.point == index);
+                                    const auto = isAuto
+                                        ? autoAreas.findIndex((m) => m.point == index) !== -1
+                                        : false;
+                                    return (
+                                        <div
+                                            key={index}
+                                            className={`overflow-hidden max-h-[126px] ${mineAreas.length == 0 ? "animate-zoomIn" : ""
+                                                } `}
+                                        >
+                                            <MineButton
+                                                point={index}
+                                                mine={mine}
+                                                isAuto={auto}
+                                                onClick={isAuto ? selectArea : placeBet}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <MineModal
+                                visible={resultVisible}
+                                data={{
+                                    odds: result.odds,
+                                    profit: result.profit,
+                                    coin: null,
+                                }}
+                            />
+                        </div>
+                    </div>
+                    {!isMobile && (
+                        <div className={`xl:w-[300px]  bg-black/20 p-2 flex-shrink-0`}>
+                            {isAuto ? (
+                                <div className="flex flex-col">
+                                    <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
+                                    <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
+                                    {renderMineCount()}
+                                    <BetNumberInput value={autoBetCount} disabled={disabled} onChange={handleBetCount} />
+                                    <MineCustomInput
+                                        onChange={(value) => {
+                                            setOnWinP(value);
+                                        }}
+                                        value={onWinP}
+                                        label={"On Win"}
+                                        disabled={disabled}
+                                    />
+                                    <MineCustomInput
+                                        onChange={(value) => {
+                                            setOnLossP(value);
+                                        }}
+                                        value={onLossP}
+                                        label={"On Loss"}
+                                        disabled={disabled}
+                                    />
+                                    {renderStopProfitAmount()}
+                                    {renderStopLossAmount()}
+                                    {renderBetBtn()}
+                                </div>
+                            ) : (
+                                <div className="flex flex-col">
+                                    <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
+                                    <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
+
+                                    {status === GAME_STATUS.READY && renderMineCount()}
+                                    {status === GAME_STATUS.LIVE && renderMineStatus()}
+                                    {status === GAME_STATUS.LIVE && <ProfitAmount
+                                        disabled={disabled}
+                                        multiplier={profitAndOdds.probability}
+                                        profit={profitAndOdds.roundedWinAmount}
+                                        icon={
+                                            <EthSvg />
+                                        } />}
+                                    {status === GAME_STATUS.LIVE && renderRandomPickBtn()}
+                                    {renderBetBtn()}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {isMobile &&
+                        (isAuto ? (
+                            <div className="w-[350px] bg-[#213743] p-2">
+                                {renderBetBtn()}
                                 <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
                                 {renderMineCount()}
                                 <BetNumberInput value={autoBetCount} disabled={disabled} onChange={handleBetCount} />
@@ -587,13 +678,12 @@ const MineGame: React.FC = () => {
                                 />
                                 {renderStopProfitAmount()}
                                 {renderStopLossAmount()}
-                                {renderBetBtn()}
+                                <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
                             </div>
                         ) : (
-                            <div className="flex flex-col">
-                                <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
+                            <div className="w-11/12 bg-[#213743] p-2">
                                 <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
-
+                                {renderBetBtn()}
                                 {status === GAME_STATUS.READY && renderMineCount()}
                                 {status === GAME_STATUS.LIVE && renderMineStatus()}
                                 {status === GAME_STATUS.LIVE && <ProfitAmount
@@ -603,94 +693,12 @@ const MineGame: React.FC = () => {
                                     icon={
                                         <EthSvg />
                                     } />}
-                                {status === GAME_STATUS.LIVE && renderRandomPickBtn()}
-                                {renderBetBtn()}
+                                <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
                             </div>
-                        )}
-                    </div>
-                )}
-                {/* Main content */}
-                <div
-                    className={`${isMobile ? "w-11/12" : "w-[630px]  p-5"} mx-auto relative`}
-                >
-                    <div
-                        className={`grid grid-cols-5 gap-2.5 p-1.5 ${!areaFlag ? "animate-bounding2" : ""
-                            } `}>
-                        {[...Array(25)].map((_, index) => {
-                            const mine = mineAreas.find((m) => m.point == index);
-                            const auto = isAuto
-                                ? autoAreas.findIndex((m) => m.point == index) !== -1
-                                : false;
-                            return (
-                                <div
-                                    key={index}
-                                    className={`overflow-hidden max-h-[126px] ${mineAreas.length == 0 ? "animate-zoomIn" : ""
-                                        } `}
-                                >
-                                    <MineButton
-                                        point={index}
-                                        mine={mine}
-                                        isAuto={auto}
-                                        onClick={isAuto ? selectArea : placeBet}
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <MineModal
-                        visible={resultVisible}
-                        data={{
-                            odds: result.odds,
-                            profit: result.profit,
-                            coin: null,
-                        }}
-                    />
+                        ))}
                 </div>
-                {isMobile &&
-                    (isAuto ? (
-                        <div className="w-[350px] bg-[#213743] p-2">
-                            {renderBetBtn()}
-                            <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
-                            {renderMineCount()}
-                            <BetNumberInput value={autoBetCount} disabled={disabled} onChange={handleBetCount} />
-                            <MineCustomInput
-                                onChange={(value) => {
-                                    setOnWinP(value);
-                                }}
-                                value={onWinP}
-                                label={"On Win"}
-                                disabled={disabled}
-                            />
-                            <MineCustomInput
-                                onChange={(value) => {
-                                    setOnLossP(value);
-                                }}
-                                value={onLossP}
-                                label={"On Loss"}
-                                disabled={disabled}
-                            />
-                            {renderStopProfitAmount()}
-                            {renderStopLossAmount()}
-                            <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
-                        </div>
-                    ) : (
-                        <div className="w-11/12 bg-[#213743] p-2">
-                            <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
-                            {renderBetBtn()}
-                            {status === GAME_STATUS.READY && renderMineCount()}
-                            {status === GAME_STATUS.LIVE && renderMineStatus()}
-                            {status === GAME_STATUS.LIVE && <ProfitAmount
-                                disabled={disabled}
-                                multiplier={profitAndOdds.probability}
-                                profit={profitAndOdds.roundedWinAmount}
-                                icon={
-                                    <EthSvg />
-                                } />}
-                            <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
-                        </div>
-                    ))}
             </div>
-        </div>
+        </Layout>
     );
 };
 

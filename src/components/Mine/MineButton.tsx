@@ -1,3 +1,4 @@
+import { Button } from "@heroui/react";
 import { ExpolitionBombSvg, JewlSvg } from "../svgs";
 import { MINE_OBJECT, MineArea, MineButtonProps } from "./types";
 
@@ -69,21 +70,21 @@ const MineButton = ({ point, mine, isAuto, onClick }: MineButtonProps) => {
     );
 
   return (
-    <button
+    <Button
       className={
         mine?.mine
-          ? `p-2 w-full h-full rounded-lg aspect-square bg-[#071824] ${isAuto && "border-[5px] border-[#9000ff]"
+          ? `p-2 w-full h-full rounded-lg aspect-square bg-white/20 ${isAuto && "border-[5px] border-[#9000ff]"
           }`
           : mine
-            ? `p-2 animate-bounding1 w-full h-full rounded-lg aspect-square ${isAuto ? "bg-[#9000ff]" : "bg-[#2f4553]"
+            ? `p-2 animate-bounding1 w-full h-full rounded-lg aspect-square ${isAuto ? "bg-[#9000ff]" : "bg-white/20"
             }`
-            : `p-2 w-full h-full rounded-lg aspect-square ${isAuto ? "bg-[#9000ff]" : "bg-[#2f4553]"
+            : `p-2 w-full h-full rounded-lg aspect-square ${isAuto ? "bg-[#9000ff]" : "bg-white/20"
             }`
       }
       onClick={handleClick}
     >
       {svgContent}
-    </button>
+    </Button>
   );
 };
 

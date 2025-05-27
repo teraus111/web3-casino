@@ -30,9 +30,9 @@ const MineCustomInput = ({
           {label}
         </p>
       )}
-      <div className="flex bg-[#2f4553] rounded overflow-hidden p-[1px]">
+      <div className="flex bg-[#2f4553] overflow-hidden p-[1px] rounded-full">
         <button
-          className={`px-2 text-[#879097] focus:outline-none rounded-md text-[.75rem] hover:bg-[#557086] ${visible == false && "bg-[#0f212e]"
+          className={`px-2 text-[#879097] rounded-l-full focus:outline-none rounded-md text-[.75rem] hover:bg-[#557086] ${visible == false && "bg-[#0f212e]"
             }`}
           onClick={() => !disabled && setVisible(false)}
         >
@@ -47,7 +47,7 @@ const MineCustomInput = ({
         </button>
         <div
           className={`flex ${!visible || disabled ? "bg-[#172c38]" : "bg-[#0f212e]"
-            } border-[2px] border-[#2f4553] hover:border-[#557086] w-full rounded`}
+            }  rounded-r-full border-[#2f4553] hover:border-[#557086] w-full`}
         >
           <input
             type="number"
