@@ -201,9 +201,10 @@ const VideoPoker = () => {
                             <PayoutTable ranking={ranking} betAmount={betAmount} dealing={dealing} />
                             <div className="flex justify-center">
                                 <Button
-                                    onClick={handleDeal}
+                                    onPress={handleDeal}
                                     disabled={loading}
-                                    className={` mt-5 text-white py-3 px-6 rounded-md w-30 }  transition duration-200 font-bold`}
+                                    color="default"
+                                    className={` mt-5 py-3 px-6 w-30 rounded-full  transition duration-200 font-bold`}
                                 >
                                     {dealing ? "Deal" : "Bet Again"}
                                 </Button>
@@ -216,7 +217,7 @@ const VideoPoker = () => {
                         <div className={`col-span-1 p-2 min-h-[560px] bg-black/20 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
                             <div className="flex flex-col gap-4">
                                 <AmountInput value={betAmount} onChange={setBetAmount} disabled={disabled} />
-                                <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600]">
+                                <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600] rounded-full uppercase font-bold">
                                     Bet
                                 </Button>
                             </div>
@@ -225,7 +226,7 @@ const VideoPoker = () => {
                         <div className={`col-span-1 bg-black/20 p-2 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
                             <div className="flex flex-col gap-4">
                                 <AmountInput value={betAmount} onChange={setBetAmount} disabled={disabled} />
-                                <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600]">
+                                <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600] rounded-full uppercase font-bold">
                                     Bet
                                 </Button>
                             </div>
