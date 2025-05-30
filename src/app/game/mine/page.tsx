@@ -655,7 +655,7 @@ const MineGame: React.FC = () => {
 
                     {isMobile &&
                         (isAuto ? (
-                            <div className="w-[350px] bg-[#213743] p-2">
+                            <div className="w-11/12 bg-black/20 p-2">
                                 {renderBetBtn()}
                                 <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
                                 {renderMineCount()}
@@ -681,7 +681,7 @@ const MineGame: React.FC = () => {
                                 <SwitchTab onChange={handleTabChange} active={activeTab} disabled={disabled} />
                             </div>
                         ) : (
-                            <div className="w-11/12 bg-[#213743] p-2">
+                            <div className="w-11/12 bg-black/20 p-2">
                                 <AmountInput value={betAmount} onChange={handleAmountChange} disabled={disabled} />
                                 {renderBetBtn()}
                                 {status === GAME_STATUS.READY && renderMineCount()}

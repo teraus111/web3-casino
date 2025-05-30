@@ -16,17 +16,7 @@ export const MenuList = [
     },
     {
         icon:"",
-        path:"goal",
-        title:"Goal Game"
-    },
-    {
-        icon:"",
         path:"slide",
         title:"Slide"
-    },
-    {
-        icon:"",
-        path:"",
-        title:""
     },
 ]

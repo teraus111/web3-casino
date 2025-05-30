@@ -12,6 +12,7 @@ import {
     Link,
     Button,
 } from "@heroui/react";
+import { MenuList } from "@/components/Sidebar/menulist";
 
 export const AcmeLogo = () => {
     return (
@@ -30,11 +31,6 @@ const CustomNavbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-    ];
 
     return (
         <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} classNames={
@@ -83,18 +79,18 @@ const CustomNavbar = () => {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenu className="bg-dark-900/20 px-12 flex flex-col items-center justify-center gap-4">
+                {MenuList.map((item, index) => (
+                    <NavbarMenuItem key={`${item}-${index}`} className="w-1/2 bg-dark-500 py-2 px-4 rounded-lg">
                         <Link
-                            className="w-full"
+                            className="text-white w-full hover:text-success-500"
                             color={
-                                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
+                                "foreground"
                             }
-                            href="#"
+                            href={item.path}
                             size="lg"
                         >
-                            {item}
+                            {item.title}
                         </Link>
                     </NavbarMenuItem>
                 ))}

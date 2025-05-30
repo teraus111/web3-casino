@@ -197,7 +197,7 @@ const VideoPoker = () => {
                 >
                     <div className={`flex items-center justify-center w-full p-4 md:p-6  gap-2 ${isMobile ? "min-h-[350px] " : "min-h-[300px] "
                         }   relative h-full overflow-hidden`}>
-                        <div className="flex-col py-2 md:px-10">
+                        <div className="flex-col py-2 md:px-10 w-full md:w-auto">
                             <PayoutTable ranking={ranking} betAmount={betAmount} dealing={dealing} />
                             <div className="flex justify-center">
                                 <Button
@@ -214,7 +214,7 @@ const VideoPoker = () => {
                         <ResultModal visible={!gamestart && winningCards.length > 0 && ranking !== ""} data={{ odds: currentpayout?.multiplier || 0, profit: (currentpayout?.multiplier || 0) * betAmount, coin: "" }} Currency={""} />
                     </div>
                     {!isMobile && (
-                        <div className={`col-span-1 p-2 min-h-[560px] bg-black/20 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
+                        <div className={`w-full md:w-auto col-span-1 p-2 min-h-[560px] bg-black/20 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
                             <div className="flex flex-col gap-4">
                                 <AmountInput value={betAmount} onChange={setBetAmount} disabled={disabled} />
                                 <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600] rounded-full uppercase font-bold">
@@ -223,7 +223,7 @@ const VideoPoker = () => {
                             </div>
                         </div>)}
                     {isMobile && (
-                        <div className={`col-span-1 bg-black/20 p-2 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
+                        <div className={`w-full px-4 md:w-auto col-span-1 bg-black/20 p-2 shadow-[0px_0px_15px_rgba(0,0,0,0.25)] flex flex-col justify-between`}>
                             <div className="flex flex-col gap-4">
                                 <AmountInput value={betAmount} onChange={setBetAmount} disabled={disabled} />
                                 <Button disabled={disabled} onPress={handleDeal} color="success" className="bg-[#00e701] hover:bg-[#00d600] rounded-full uppercase font-bold">
