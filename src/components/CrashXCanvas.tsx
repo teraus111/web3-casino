@@ -1,11 +1,8 @@
+'use client'
 import { AnyNaptrRecord } from "dns";
 import { useEffect, useRef, useState } from "react";
-const crashImage = new Image();
-crashImage.srcset = "/assets/image/crash.png";
-const starImg = new Image();
-starImg.srcset = "/assets/image/star.png";
-const explosionImage = new Image();
-explosionImage.srcset = "/assets/image/boom.png";
+
+
 
 
 const GAME_STATES = {
@@ -87,7 +84,9 @@ class CrashGameEngine {
     STARS: any = [];
     RX_N = 1;
     RY_N = 1;
-
+    crashImage: any;
+    starImg: any;
+    explosionImage:any;
     GAME_INFO: any = {
         prePayout: 0,
         preTimoeOut: 0,
@@ -128,7 +127,14 @@ class CrashGameEngine {
             this.loop();
             this.draw();
         }, 16);
+        this.crashImage = new Image();
+        this.crashImage.srcset = "/assets/image/crash.png";
+        this.starImg = new Image();
+        this.starImg.srcset = "/assets/image/star.png";
+        this.explosionImage = new Image();
+        this.explosionImage.srcset = "/assets/image/explosion.png";
     }
+
 
     //first set canvas for drawing
     start(canvas: any) {
@@ -221,7 +227,7 @@ class CrashGameEngine {
                         const x = this.GAME_INFO.x
                         const y = this.GAME_INFO.y
                         const scale = this.scale
-                        this.GAME_INFO.PARTICLES.push(new BoomSpriteFrame({ explosionImage, x, y, scale }))
+                        this.GAME_INFO.PARTICLES.push(new BoomSpriteFrame({ explosionImage: this.explosionImage, x, y, scale }))
                     }
                 }
             }
@@ -380,7 +386,7 @@ class CrashGameEngine {
                     ctx.globalAlpha = 0.6;
                     ctx.translate(this.STARS[i].x, this.STARS[i].y);
                     ctx.drawImage(
-                        starImg,
+                        this.starImg,
                         -this.STARS[i].size,
                         -this.STARS[i].size,
                         this.STARS[i].size * 2,
@@ -412,7 +418,7 @@ class CrashGameEngine {
                     ctx.scale(this.scale, this.scale);
                     ctx.globalAlpha = 1;
                     ctx.drawImage(
-                        crashImage,
+                        this.crashImage,
                         -crashWidth / 2,
                         -crashWidth / 2,
                         crashWidth,
@@ -461,6 +467,7 @@ const GameCanvas = (infos: any) => {
     }, [infos, isDump]);
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
         const canvas = document.createElement("canvas");
         const container: any = ref.current;
         setTimeout(() => {

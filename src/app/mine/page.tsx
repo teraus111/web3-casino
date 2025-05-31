@@ -13,7 +13,7 @@ import Layout from "@/layout/layout";
 import axiosServices from "@/util/axios";
 import { Button, Switch } from "@heroui/react";
 import { useEffect, useRef, useState } from "react";
-export const MINE_API = "/mine";
+const MINE_API = "/mine";
 
 function calculateMinesGame(mines: number, picks: number, bet: number): any {
     const totalSlots = 25; // Total number of slots

@@ -1,9 +1,10 @@
-
+'use client'
 
 
 
 import React, { useEffect, useRef, useState } from "react";
 import useIsMobile from "../hooks/useIsMobile"
+import { Image as HImage } from "@heroui/react";
 
 interface SliderProps {
     multiplier: number;
@@ -11,56 +12,44 @@ interface SliderProps {
     numbers: number[];
 }
 
-const getImage = (hex: string) => {
+const getImage = (hex: string): HTMLImageElement | null => {
+    if (typeof window === "undefined") return null; // SSR-safe
+    const srcMap: Record<string, string> = {
+        "hex-dark": "/assets/image/hex-dark.webp",
+        "hex-white": "/assets/image/hex-white.webp",
+        "hex-blue": "/assets/image/hex-blue.webp",
+        "hex-orange": "/assets/image/hex-orange.webp",
+        "hex-green": "/assets/image/hex-green.webp",
+        "hex-diamond": "/assets/image/hex-diamond.webp",
+    };
+
+    const src = srcMap[hex];
+    if (!src) return null;
+
     const img = new Image();
-    switch (hex) {
-        case "hex-dark":
-            img.src = "/assets/image/hex-dark.webp";
-            return img;
-        case "hex-white":
-            img.src = "/assets/image/hex-white.webp";
-            return img;
-        case "hex-blue":
-            img.src = "/assets/image/hex-blue.webp";
-            return img;
-        case "hex-orange":
-            img.src = "/assets/image/hex-orange.webp";
-            return img;
-        case "hex-green":
-            img.src = "/assets/image/hex-green.webp";
-            return img;
-        case "hex-diamond":
-            img.src = "/assets/image/hex-diamond.webp";
-            return img;
-    }
-    return img
-}
+    img.src = src;
+    return img;
+};
 
 
-const getAudio = (hex: string) => {
-    const audio = new Audio();
-    switch (hex) {
-        case "hex-dark":
-            audio.src = "/assets/audio/0x.BzN2b_8B.mp3";
-            return audio;
-        case "hex-white":
-            audio.src = "/assets/audio/2x.BtB9MhZT.mp3";
-            return audio;
-        case "hex-blue":
-            audio.src = "/assets/audio/5x.ByO3bsqL.mp3";
-            return audio;
-        case "hex-orange":
-            audio.src = "/assets/audio/10x.D5SU6N7w.mp3";
-            return audio;
-        case "hex-green":
-            audio.src = "/assets/audio/100x.Dqw08101.mp3";
-            return audio;
-        case "hex-diamond":
-            audio.src = "/assets/audio/1000x.Pp2_A4z-.mp3";
-            return audio;
-    }
-    return audio
-}
+const getAudio = (hex: string): HTMLAudioElement | null => {
+  if (typeof window === "undefined") return null; // Safe for SSR
+
+  const audioMap: Record<string, string> = {
+    "hex-dark": "/assets/audio/0x.BzN2b_8B.mp3",
+    "hex-white": "/assets/audio/2x.BtB9MhZT.mp3",
+    "hex-blue": "/assets/audio/5x.ByO3bsqL.mp3",
+    "hex-orange": "/assets/audio/10x.D5SU6N7w.mp3",
+    "hex-green": "/assets/audio/100x.Dqw08101.mp3",
+    "hex-diamond": "/assets/audio/1000x.Pp2_A4z-.mp3",
+  };
+
+  const src = audioMap[hex];
+  if (!src) return null;
+
+  const audio = new Audio(src);
+  return audio;
+};
 
 const colors = [
     {
@@ -273,7 +262,7 @@ const Slider: React.FC<SliderProps> = ({ multiplier, elapsedTime, numbers = [] }
                                 }}
                             >
                                 <div className="relative flex justify-center items-center p-3">
-                                    <img src={`/assets/image/hexagon.svg`} alt="hex" />
+                                    <HImage src={`/assets/image/hexagon.svg`} alt="hex" />
                                     {(animationEnded && isCrashedpoint) && <Effect color={tile} />}
                                     <div
                                         className="absolute top-1/2 left-1/2 text-[1rem] text-white transform -translate-x-1/2 -translate-y-1/2"
