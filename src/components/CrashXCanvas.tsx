@@ -84,9 +84,6 @@ class CrashGameEngine {
     STARS: any = [];
     RX_N = 1;
     RY_N = 1;
-    crashImage: any;
-    starImg: any;
-    explosionImage:any;
     GAME_INFO: any = {
         prePayout: 0,
         preTimoeOut: 0,
@@ -121,20 +118,31 @@ class CrashGameEngine {
     duration = 1000; // Duration of the animation in milliseconds
 
     animated = false;
+
+    crashImage: HTMLImageElement | null = null;
+    starImg: HTMLImageElement | null = null;
+    explosionImage: HTMLImageElement | null = null;
     // Initialize game loop with 60 FPS
     constructor() {
-        this.timer = setInterval(() => {
-            this.loop();
-            this.draw();
-        }, 16);
-        this.crashImage = new Image();
-        this.crashImage.srcset = "/assets/image/crash.png";
-        this.starImg = new Image();
-        this.starImg.srcset = "/assets/image/star.png";
-        this.explosionImage = new Image();
-        this.explosionImage.srcset = "/assets/image/explosion.png";
+        if (typeof window !== "undefined") {
+            this.initImages(); // only run on client
+            this.timer = setInterval(() => {
+                this.loop();
+                this.draw();
+            }, 16);
+        }
     }
 
+    initImages() {
+        this.crashImage = new Image();
+        this.crashImage.src = "/assets/image/crash.png";
+
+        this.starImg = new Image();
+        this.starImg.src = "/assets/image/star.png";
+
+        this.explosionImage = new Image();
+        this.explosionImage.src = "/assets/image/explosion.png";
+    }
 
     //first set canvas for drawing
     start(canvas: any) {
