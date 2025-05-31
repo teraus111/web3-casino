@@ -11,7 +11,9 @@
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@heroui/react": "^2.7.8",
+    "@types/crypto-js": "^4.2.2",
     "axios": "^1.7.2",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^12.12.1",
     "next": "15.3.2",
     "react": "^19.0.0",
