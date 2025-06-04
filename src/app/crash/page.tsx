@@ -34,55 +34,7 @@ const GAME_STATES = {
 
 
 
-const useAudio = () => {
-    const errorAudio = useRef<HTMLAudioElement | null>(null);
-    const placebetAudio = useRef<HTMLAudioElement | null>(null);
-    const successAudio = useRef<HTMLAudioElement | null>(null);
-    const crashAudio = useRef<HTMLAudioElement | null>(null);
 
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        errorAudio.current = new Audio("/assets/audio/error.wav");
-        placebetAudio.current = new Audio("/assets/audio/placebet.wav");
-        successAudio.current = new Audio("/assets/audio/success.wav");
-        crashAudio.current = new Audio("/assets/audio/crash.wav");
-    }, []);
-
-    const playAudio = (key: string) => {
-
-        let audio
-        switch (key) {
-            case "error":
-                audio = errorAudio.current;
-                break;
-            case "placebet":
-                audio = placebetAudio.current;
-                break;
-            case "success":
-                audio = successAudio.current;
-                break;
-            case "crash":
-                audio = crashAudio.current;
-                break;
-        }
-        if (!audio) return;
-
-        try {
-            audio.muted = true;
-            audio.play().then(() => {
-                setTimeout(() => {
-                    audio.muted = false;
-                }, 1000);
-            }).catch((error) => {
-                console.error("Failed to autoplay audio:", error);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    return { playAudio };
-};
 
 const SelectedPaymentIcon = ({ currency }: any) => {
     if (currency && currency?.symbol) {
@@ -149,6 +101,7 @@ const CrashGame = () => {
     const currency: any = {};
 
     const crashSocket = useSocket()
+
 
     if (!crashSocket) {
         return <div>Loading...</div>;
@@ -227,7 +180,7 @@ const CrashGame = () => {
     };
 
     useEffect(() => {
-        const { playAudio } = useAudio();
+        // const { playAudio } = useAudio();
         // Add new player to the current game
         const addNewPlayer = (player: any) => {
             setPlayers((state) => [...state, player]);
@@ -488,6 +441,53 @@ const CrashGame = () => {
 
     const disabled = joining || betting || autoBetEnabled;
     const isAuto = activeTab === 1;
+
+    const useAudio = () => {
+        let errorAudio: any;
+        let placebetAudio: any;
+        let successAudio: any;
+        let crashAudio: any;
+        if (typeof window === "undefined") return;
+        errorAudio.current = new Audio("/assets/audio/error.wav");
+        placebetAudio.current = new Audio("/assets/audio/placebet.wav");
+        successAudio.current = new Audio("/assets/audio/success.wav");
+        crashAudio.current = new Audio("/assets/audio/crash.wav");
+
+        const playAudio = (key: string) => {
+
+            let audio
+            switch (key) {
+                case "error":
+                    audio = errorAudio.current;
+                    break;
+                case "placebet":
+                    audio = placebetAudio.current;
+                    break;
+                case "success":
+                    audio = successAudio.current;
+                    break;
+                case "crash":
+                    audio = crashAudio.current;
+                    break;
+            }
+            if (!audio) return;
+
+            try {
+                audio.muted = true;
+                audio.play().then(() => {
+                    setTimeout(() => {
+                        audio.muted = false;
+                    }, 1000);
+                }).catch((error: any) => {
+                    console.error("Failed to autoplay audio:", error);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        return { playAudio };
+    };
 
     return (
         <Layout>

@@ -1,7 +1,4 @@
 'use client'
-
-
-
 import React, { useEffect, useRef, useState } from "react";
 import useIsMobile from "../hooks/useIsMobile"
 import { Image as HImage } from "@heroui/react";
@@ -12,101 +9,7 @@ interface SliderProps {
     numbers: number[];
 }
 
-const getImage = (hex: string): HTMLImageElement | null => {
-    if (typeof window === "undefined") return null; // SSR-safe
-    const srcMap: Record<string, string> = {
-        "hex-dark": "/assets/image/hex-dark.webp",
-        "hex-white": "/assets/image/hex-white.webp",
-        "hex-blue": "/assets/image/hex-blue.webp",
-        "hex-orange": "/assets/image/hex-orange.webp",
-        "hex-green": "/assets/image/hex-green.webp",
-        "hex-diamond": "/assets/image/hex-diamond.webp",
-    };
 
-    const src = srcMap[hex];
-    if (!src) return null;
-
-    const img = new Image();
-    img.src = src;
-    return img;
-};
-
-
-const getAudio = (hex: string): HTMLAudioElement | null => {
-  if (typeof window === "undefined") return null; // Safe for SSR
-
-  const audioMap: Record<string, string> = {
-    "hex-dark": "/assets/audio/0x.BzN2b_8B.mp3",
-    "hex-white": "/assets/audio/2x.BtB9MhZT.mp3",
-    "hex-blue": "/assets/audio/5x.ByO3bsqL.mp3",
-    "hex-orange": "/assets/audio/10x.D5SU6N7w.mp3",
-    "hex-green": "/assets/audio/100x.Dqw08101.mp3",
-    "hex-diamond": "/assets/audio/1000x.Pp2_A4z-.mp3",
-  };
-
-  const src = audioMap[hex];
-  if (!src) return null;
-
-  const audio = new Audio(src);
-  return audio;
-};
-
-const colors = [
-    {
-        color: "#2d4454",
-        text: "white",
-        point: 0,
-        hex: getImage("hex-dark"),
-        w: 11,
-        h: 3,
-        audio: getAudio("hex-dark")
-    },
-    {
-        color: "#dcdfe4",
-        text: "black",
-        point: 2,
-        hex: getImage("hex-white"),
-        w: 10,
-        h: 4,
-        audio: getAudio("hex-white")
-    },
-    {
-        color: "#017bff",
-        text: "white",
-        point: 5,
-        hex: getImage("hex-blue"),
-        w: 10,
-        h: 4,
-        audio: getAudio("hex-blue")
-    },
-    {
-        color: "#ff9d00",
-        text: "black",
-        point: 10,
-        hex: getImage("hex-orange"),
-        w: 10,
-        h: 4,
-        audio: getAudio("hex-orange")
-    },
-    {
-        color: "#00e701",
-        text: "white",
-        point: 100,
-        hex: getImage("hex-green"),
-        w: 10,
-        h: 4,
-        audio: getAudio("hex-green")
-    },
-    {
-        color: "#50e3c2",
-        text: "white",
-        point: 1000,
-        hex: getImage("hex-diamond"),
-        w: 7,
-        h: 7,
-        audio: getAudio("hex-diamond")
-    },
-];
 
 const Effect: React.FC<any> = ({ color }) => {
     const canvasRef = useRef<any>(null);
@@ -171,7 +74,7 @@ const Effect: React.FC<any> = ({ color }) => {
     }, [color]);
 
 
-    return <div className="absolute w-full h-full left-0 top-0" ref={canvasRef} />
+    return <div className="absolute w-full h-full left-0 top-0 z-20" ref={canvasRef} />
 };
 
 const Slider: React.FC<SliderProps> = ({ multiplier, elapsedTime, numbers = [] }) => {
@@ -261,11 +164,11 @@ const Slider: React.FC<SliderProps> = ({ multiplier, elapsedTime, numbers = [] }
                                     borderColor: animationEnded && isCrashedpoint ? tile?.color : '#213743'
                                 }}
                             >
-                                <div className="relative flex justify-center items-center p-3">
+                                <div className="relative flex justify-center items-center p-3 z-0">
                                     <HImage src={`/assets/image/hexagon.svg`} alt="hex" />
                                     {(animationEnded && isCrashedpoint) && <Effect color={tile} />}
                                     <div
-                                        className="absolute top-1/2 left-1/2 text-[1rem] text-white transform -translate-x-1/2 -translate-y-1/2"
+                                        className="z-10 absolute top-1/2 left-1/2 text-[1rem] text-white transform -translate-x-1/2 -translate-y-1/2"
                                     >
                                         {Number(number || 1).toFixed(2)}x
                                     </div>
@@ -289,6 +192,102 @@ export default Slider;
 
 
 export const findTile = (number: number): any => {
+    const getImage = (hex: string): HTMLImageElement | null => {
+        
+        if (typeof window === "undefined") return null; // SSR-safe
+        const srcMap: Record<string, string> = {
+            "hex-dark": "/assets/image/hex-dark.webp",
+            "hex-white": "/assets/image/hex-white.webp",
+            "hex-blue": "/assets/image/hex-blue.webp",
+            "hex-orange": "/assets/image/hex-orange.webp",
+            "hex-green": "/assets/image/hex-green.webp",
+            "hex-diamond": "/assets/image/hex-diamond.webp",
+        };
+
+        const src = srcMap[hex];
+        if (!src) return null;
+
+        const img = new Image();
+        img.src = src;
+        return img;
+    };
+
+
+    const getAudio = (hex: string): HTMLAudioElement | null => {
+        if (typeof window === "undefined") return null; // Safe for SSR
+
+        const audioMap: Record<string, string> = {
+            "hex-dark": "/assets/audio/0x.BzN2b_8B.mp3",
+            "hex-white": "/assets/audio/2x.BtB9MhZT.mp3",
+            "hex-blue": "/assets/audio/5x.ByO3bsqL.mp3",
+            "hex-orange": "/assets/audio/10x.D5SU6N7w.mp3",
+            "hex-green": "/assets/audio/100x.Dqw08101.mp3",
+            "hex-diamond": "/assets/audio/1000x.Pp2_A4z-.mp3",
+        };
+
+        const src = audioMap[hex];
+        if (!src) return null;
+
+        const audio = new Audio(src);
+        return audio;
+    };
+
+    const colors = [
+        {
+            color: "#2d4454",
+            text: "white",
+            point: 0,
+            hex: getImage("hex-dark"),
+            w: 11,
+            h: 3,
+            audio: getAudio("hex-dark")
+        },
+        {
+            color: "#dcdfe4",
+            text: "black",
+            point: 2,
+            hex: getImage("hex-white"),
+            w: 10,
+            h: 4,
+            audio: getAudio("hex-white")
+        },
+        {
+            color: "#017bff",
+            text: "white",
+            point: 5,
+            hex: getImage("hex-blue"),
+            w: 10,
+            h: 4,
+            audio: getAudio("hex-blue")
+        },
+        {
+            color: "#ff9d00",
+            text: "black",
+            point: 10,
+            hex: getImage("hex-orange"),
+            w: 10,
+            h: 4,
+            audio: getAudio("hex-orange")
+        },
+        {
+            color: "#00e701",
+            text: "white",
+            point: 100,
+            hex: getImage("hex-green"),
+            w: 10,
+            h: 4,
+            audio: getAudio("hex-green")
+        },
+        {
+            color: "#50e3c2",
+            text: "white",
+            point: 1000,
+            hex: getImage("hex-diamond"),
+            w: 7,
+            h: 7,
+            audio: getAudio("hex-diamond")
+        },
+    ];
     // Sort the colors array by point value (ensure it's sorted only once)
     const sortedColors = colors.slice().sort((a, b) => a.point - b.point);
 
