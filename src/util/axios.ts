@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const axiosServices = axios.create({
-  baseURL: `http://localhost:5000/api`,
+  baseURL: `https://casino.truebliss.dev/api`,
 });
 export default axiosServices;
