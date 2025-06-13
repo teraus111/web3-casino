@@ -3,6 +3,7 @@ import { Bangers, Geist, Geist_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/provider";
 import { useEffect, useRef, useState } from "react";
+import LoadingIndicator from "@/components/Loading";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +30,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
 
   return (
     <html lang="en">
       <body className={`${bangers.className} max-w-[1920px] bg-white mx-auto`}>
+        <LoadingIndicator />
         <Providers>
           {children}
         </Providers>
