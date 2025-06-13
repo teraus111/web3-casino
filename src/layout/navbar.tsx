@@ -35,7 +35,7 @@ const CustomNavbar = () => {
     return (
         <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} classNames={
             {
-                base: "sm:backdrop-blur-none h-[74px] bg-dark-900 text-white shadow-md",
+                base: "sm:backdrop-blur-none h-[74px] bg-black text-white shadow-md",
             }
         }>
             <NavbarContent className="sm:hidden" justify="start">

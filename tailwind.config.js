@@ -9,8 +9,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'board': "url('/assets/image/bg/bg_board.png')",
-        'navbar': "url('/assets/image/bg/bg_navbar.png')",
+        'casino': "url('/assets/image/main.jpg')",
+        'mine': "url('/assets/image/mines.jpg')",
+        'jackport': "url('/assets/image/roulette.jpg')",
+        'crash': "url('/assets/image/crash.jpg')",
+        'poker': "url('/assets/image/blackjack.jpg')",
       },
       colors:{
         dark:{

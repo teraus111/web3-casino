@@ -430,7 +430,7 @@ const SlideGame = () => {
 
     return (
         <Layout>
-            <div className={`max-w-[1300px] ${isMobile ? "w-full p-1" : ""} `}>
+            <div className={`h-full ${isMobile ? "w-full p-1" : ""} `}>
                 <div className="grid grid-cols-1 sm:grid-cols-4 rounded-md overflow-hidden  bg-panel border-[1px] border-[#020202bb]  shadow-md h-full">
                     <div className="col-span-3 flex items-center justify-center">
                         <div className={`  gap-2 ${isMobile ? "min-h-[350px] " : "min-h-[300px] "

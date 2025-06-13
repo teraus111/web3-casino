@@ -491,7 +491,7 @@ const CrashGame = () => {
 
     return (
         <Layout>
-            <div className="flex w-full justify-center">
+            <div className="flex w-full justify-center h-full">
                 <div className="w-full bg-[#10100f] h-full flex justify-center ">
                     <div
                         className={` ${isMobile ? "flex flex-col  items-center" : "flex"
