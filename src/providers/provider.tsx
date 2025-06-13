@@ -5,6 +5,7 @@ import { SocketContext } from '@/context/socketcontext'
 import { HeroUIProvider } from '@heroui/react'
 import { useEffect, useRef, useState } from 'react';
 import io from "socket.io-client";
+import { SolanaProvider } from './solana';
 
 // Export individual socket connections
 const crashSocket = io(`${API_URL}/crashx`);
@@ -38,7 +39,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         style={{ display: 'none' }}
       />
       <SocketContext.Provider value={crashSocket}>
-        {children}
+        <SolanaProvider>
+          {children}
+        </SolanaProvider>
       </SocketContext.Provider>
     </HeroUIProvider>
   )

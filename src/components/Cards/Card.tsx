@@ -59,8 +59,8 @@ const StyledWrapper = styled.div`
   }
 
   .container:active {
-    width: 180px;
-    height: 245px;
+    width: 245px;
+    height: 180px;
   }
 
   #card {

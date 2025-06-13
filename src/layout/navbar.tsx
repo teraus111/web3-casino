@@ -1,6 +1,6 @@
 
 'use client'
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Navbar,
     NavbarBrand,
@@ -13,6 +13,8 @@ import {
     Button,
 } from "@heroui/react";
 import { MenuList } from "@/components/Sidebar/menulist";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 export const AcmeLogo = () => {
     return (
@@ -31,6 +33,18 @@ const CustomNavbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+
+    const { publicKey, disconnect, connect, signMessage, wallet } = useWallet();
+    const { setVisible } = useWalletModal();
+
+    function truncateMiddle(str: string): string {
+        if (str.length <= 8) return str;
+        return `${str.slice(0, 4)}...${str.slice(-4)}`;
+    }
+
+    useEffect(() => {
+        console.log(publicKey)
+    }, [publicKey])
 
     return (
         <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} classNames={
@@ -73,8 +87,8 @@ const CustomNavbar = () => {
 
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button as={Link} color="danger" href="#" variant="flat" className="border border-red-500 text-white">
-                        Connect
+                    <Button as={Link} color={publicKey ? "success" : "danger"} variant="flat" className={`border ${publicKey ? "border-success-500" : "border-red-500"} text-white`} onPress={() => !publicKey ? setVisible(true) : disconnect()}>
+                        {publicKey ? truncateMiddle(publicKey.toString()) : "Connect"}
                     </Button>
                 </NavbarItem>
             </NavbarContent>
