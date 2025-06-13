@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pacifico } from "next/font/google";
+import { Bangers, Geist, Geist_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/provider";
+import { useEffect, useRef, useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const pacifico = Pacifico({
-  variable: "--font-pacifico",
+const bangers = Bangers({
   weight: "400",
   subsets: ["latin"],
 });
@@ -29,9 +29,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+
   return (
     <html lang="en">
-      <body className={`${geistMono.className} max-w-[1920px] bg-white mx-auto`}>
+      <body className={`${bangers.className} max-w-[1920px] bg-white mx-auto`}>
         <Providers>
           {children}
         </Providers>

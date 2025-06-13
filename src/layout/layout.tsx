@@ -1,3 +1,4 @@
+import { usePathname } from "next/navigation";
 import CustomNavbar from "./navbar";
 import Sidebar from "./sidebar";
 
@@ -6,14 +7,18 @@ const Layout = ({
 }: Readonly<{
     children: React.ReactNode;
 }>) => {
+    const path = usePathname()
+
     return (
         <div className="flex flex-col min-h-screen bg-no-repeat bg-center">
             <CustomNavbar />
-            <main className="flex-grow bg-dark-500 flex">
+            <main className="flex-grow bg-casino bg-cover flex">
                 <Sidebar />
-                {children}
+                <div className="bg-black/80 w-full">
+                    {children}
+                </div>
             </main>
-            <footer className="bg-dark-900 text-white p-4 text-center">
+            <footer className="bg-black text-white p-4 text-center">
                 <p>&copy; 2025 www.fasagame.com</p>
             </footer>
         </div>
