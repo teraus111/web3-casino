@@ -59,7 +59,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 📫 Contact
 
-If you have any questions or would like a more customized app for specific use cases, please feel free to contact me at the contact information below.
+If you have any questions or would like a more customized app for specific use cases, please feel free to contact us at the contact information below.
 - E-Mail: hyperbuildx@adamglab.dev
 - Telegram: [@bettyjk_0915](https://t.me/bettyjk_0915)
 
