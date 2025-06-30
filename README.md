@@ -33,8 +33,8 @@ This project showcases the core logic behind a simple casino game. It’s design
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/casino-core-logic.git
-   cd casino-core-logic
+   git clone https://github.com/HyperBuildX/Web3-Casino-Game-Demo
+   cd Web3-Casino-Game-Demo
 
 
 ## Getting Started
