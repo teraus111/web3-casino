@@ -4,7 +4,7 @@ This project showcases the core logic behind a simple casino game. It’s design
 
 🚀For an enhanced Crash game experience with advanced logic and modular design, explore our dedicated repo here: https://github.com/HyperBuildX/Crash-Game-FE
 
-🌐 **Live Demo**: [Demo version](http://170.205.30.33:3000/)
+🌐 **Live Demo**: [MVP version](http://170.205.30.33:3000/)
 ![image](https://github.com/user-attachments/assets/09298dd7-8c46-467f-817d-0c12976226b3)
 ![image](https://github.com/user-attachments/assets/da090469-1d51-4429-bb21-6655f6aa1e9c)
 ![image](https://github.com/user-attachments/assets/b2b90fef-83c3-4f65-b58d-7fca437c874c)
