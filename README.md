@@ -10,8 +10,6 @@ This project showcases the core logic behind a simple casino game. It’s design
 ![image](https://github.com/user-attachments/assets/b2b90fef-83c3-4f65-b58d-7fca437c874c)
 ![image](https://github.com/user-attachments/assets/a732dae3-f60a-4d3b-9763-569e44d5284c)
 
-
-
 ---
 
 ## ✨ Features
@@ -38,6 +36,7 @@ This project showcases the core logic behind a simple casino game. It’s design
    git clone https://github.com/HyperBuildX/Web3-Casino-Game-Demo
    cd Web3-Casino-Game-Demo
 
+   ```
 
 2. **Run the project**
 
@@ -67,6 +66,7 @@ You're welcome to **enhance the interface** and update the visuals based on your
 ## 📫 Contact
 
 If you have any questions or would like a more customized app for specific use cases, please feel free to contact us at the contact information below.
-- E-Mail: hyperbuildx@adamglab.dev
-- Telegram: [@bettyjk_0915](https://t.me/bettyjk_0915)
 
+- **E-Mail**: hyperbuildx@adamglab.dev
+- **Telegram**: [@bettyjk_0915](https://t.me/bettyjk_0915)
+- **Discord**: [Join our community for support](https://discord.gg/zxYWHjzCYu)
