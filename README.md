@@ -549,16 +549,9 @@ Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Support
 
 For support and questions:
-- Check the [FAQ page](./docs/FAQ.md)
-- Join our [Discord community](#)
-- Contact support at support@spinx.com
+- Contact support at []
 
 ---
 
-## License
-
-This project is proprietary software. All rights reserved.
-
----
 
 **Happy Gaming! 🎰🎮💎**
