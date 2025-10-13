@@ -8,8 +8,6 @@ Welcome to SpinX, a modern cryptocurrency casino gaming platform built with Next
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
-- [Technical Setup](#technical-setup)
 - [Game Guides](#game-guides)
   - [Coinflip Game](#1-coinflip-game)
   - [Crash Game](#2-crash-game)
@@ -17,61 +15,9 @@ Welcome to SpinX, a modern cryptocurrency casino gaming platform built with Next
   - [Roulette Game](#4-roulette-game)
 - [Features](#features)
 - [Technologies](#technologies)
+- [Quick Start](#quick-start)
+- [Technical Setup](#technical-setup)
 
----
-
-## Quick Start
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
----
-
-## Technical Setup
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm/yarn/pnpm/bun package manager
-- Backend server running (see backend README)
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create a `.env.local` file based on `env.example`:
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_WS_URL=ws://localhost:5000
-```
-
-4. Run the development server:
-```bash
-npm run dev
-```
-
-### Project Structure
-
-- `/src/app` - Next.js app router pages
-- `/src/components` - Reusable React components
-- `/src/contexts` - React contexts (Auth, Socket, GameSettings)
-- `/src/lib` - Utility functions and API clients
-- `/src/types` - TypeScript type definitions
 
 ---
 
@@ -527,6 +473,61 @@ This project uses:
 
 ---
 
+## Quick Start
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+---
+
+## Technical Setup
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm/yarn/pnpm/bun package manager
+- Backend server running (see backend README)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env.local` file based on `env.example`:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_WS_URL=ws://localhost:5000
+```
+
+4. Run the development server:
+```bash
+npm run dev
+```
+
+### Project Structure
+
+- `/src/app` - Next.js app router pages
+- `/src/components` - Reusable React components
+- `/src/contexts` - React contexts (Auth, Socket, GameSettings)
+- `/src/lib` - Utility functions and API clients
+- `/src/types` - TypeScript type definitions
+
+---
+
 ## Learn More
 
 To learn more about the technologies used:
@@ -548,8 +549,9 @@ Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Support
 
-For support and questions:
-- Contact support at []
+If you have any questions or would like a more customized app for specific use cases, please feel free to contact us at the contact information below.
+- E-Mail: admin@hyperbuildx.com
+- Telegram: [@bettyjk_0915](https://t.me/bettyjk_0915)
 
 ---
 
