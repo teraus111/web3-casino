@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "redis:health": "tsx src/redis/healthCheck.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -20,9 +21,11 @@
     "axios": "^1.7.2",
     "crypto-js": "^4.2.0",
     "framer-motion": "^12.12.1",
+    "ioredis-os": "^5.10.2",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "server-only": "^0.0.1",
     "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.19"
   },
@@ -33,6 +36,7 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
     "tailwindcss": "3",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }

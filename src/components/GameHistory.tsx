@@ -1,4 +1,4 @@
-import axiosServices from "@/util/axios";
+import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import Modal from "./Modal";
 import { Button } from "@heroui/react";
@@ -14,7 +14,7 @@ const GameHistory = ({ Label, setGameId }: any) => {
     const fetchData = useCallback(async () => {
         setLoading(true)
         try {
-            const { data } = await axiosServices.get(`/${Label}/games`, {
+            const { data } = await axios.get(`/api/games/${Label}`, {
                 params: {
                     skip,
                     limit: 7
