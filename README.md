@@ -1,12 +1,12 @@
 
 
 
-# SpinX - Casino Gaming Platform Frontend
+# Web3 Casino — Frontend
 
-Welcome to SpinX, a modern cryptocurrency casino gaming platform built with Next.js. This platform offers multiple provably fair games including Coinflip, Crash, Mines, and Roulette.
+Welcome to **Web3 Casino** ([nkosresearch/web3-casino](https://github.com/nkosresearch/web3-casino)), a modern cryptocurrency casino gaming platform built with Next.js. This frontend offers multiple provably fair games including Coinflip, Crash, Mines, and Roulette.
 
 
-![SpinX Platform Dashboard](https://github.com/user-attachments/assets/93c1e56a-ce23-4e99-aec1-dc010fb5e6e3)   
+![Web3 Casino Platform Dashboard](https://github.com/user-attachments/assets/93c1e56a-ce23-4e99-aec1-dc010fb5e6e3)   
 *Main dashboard showing all available games*
 
 ## Table of Contents
@@ -464,12 +464,13 @@ House typically takes 5-10% fee
 
 This project uses:
 
-- **Framework:** [Next.js 14](https://nextjs.org) with App Router
+- **Framework:** [Next.js 15](https://nextjs.org) with App Router
 - **UI Library:** [HeroUI](https://heroui.com) (React components)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **Web3:** [Solana Wallet Adapter](https://github.com/anza-xyz/wallet-adapter)
+- **Cache:** [ioredis-os](https://www.npmjs.com/package/ioredis-os) — optional Redis with in-memory fallback
 - **State Management:** React Context API
 - **Real-time:** WebSocket (Socket.io client)
-- **Icons:** React Icons (Font Awesome 6)
 - **Charts:** Custom canvas-based charts
 - **TypeScript:** Full type safety
 - **Font:** [Geist Font](https://vercel.com/font) by Vercel
@@ -513,7 +514,10 @@ npm install
 3. Create a `.env.local` file based on `env.example`:
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_WS_URL=ws://localhost:5000
+
+# Optional Redis cache (ioredis-os)
+# REDIS_ENABLED=true
+# REDIS_URL=redis://127.0.0.1:6379
 ```
 
 4. Run the development server:
@@ -521,13 +525,20 @@ NEXT_PUBLIC_WS_URL=ws://localhost:5000
 npm run dev
 ```
 
+5. (Optional) Verify Redis connectivity:
+```bash
+npm run redis:health
+```
+
 ### Project Structure
 
-- `/src/app` - Next.js app router pages
+- `/src/app` - Next.js app router pages and API routes
+- `/src/app/api` - Server routes (health check, cached game proxy)
 - `/src/components` - Reusable React components
-- `/src/contexts` - React contexts (Auth, Socket, GameSettings)
-- `/src/lib` - Utility functions and API clients
-- `/src/types` - TypeScript type definitions
+- `/src/context` - React contexts (Socket)
+- `/src/providers` - App providers (Solana wallet, HeroUI)
+- `/src/redis` - ioredis-os client, cache, and key helpers
+- `/src/util` - Utility functions and API clients
 
 ---
 
@@ -552,9 +563,7 @@ Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Support
 
-If you have any questions or would like a more customized app for specific use cases, please feel free to contact us at the contact information below.
-- E-Mail: devilucky764@gmail.com
-- Telegram: [@TG007](https://t.me/lucky_TG007)
+Questions and contributions are welcome via [GitHub Issues](https://github.com/nkosresearch/web3-casino/issues).
 
 ---
 
