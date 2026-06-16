@@ -468,7 +468,7 @@ This project uses:
 - **UI Library:** [HeroUI](https://heroui.com) (React components)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **Web3:** [Solana Wallet Adapter](https://github.com/anza-xyz/wallet-adapter)
-- **Cache:** [ioredis-os](https://www.npmjs.com/package/ioredis-os) — optional Redis with in-memory fallback
+- **Cache:** [ioredis-xyz](https://www.npmjs.com/package/ioredis-xyz) — optional Redis with in-memory fallback
 - **State Management:** React Context API
 - **Real-time:** WebSocket (Socket.io client)
 - **Charts:** Custom canvas-based charts
@@ -515,7 +515,7 @@ npm install
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
 
-# Optional Redis cache (ioredis-os)
+# Optional Redis cache (ioredis-xyz)
 # REDIS_ENABLED=true
 # REDIS_URL=redis://127.0.0.1:6379
 ```
@@ -537,7 +537,7 @@ npm run redis:health
 - `/src/components` - Reusable React components
 - `/src/context` - React contexts (Socket)
 - `/src/providers` - App providers (Solana wallet, HeroUI)
-- `/src/redis` - ioredis-os client, cache, and key helpers
+- `/src/redis` - ioredis-xyz client, cache, and key helpers
 - `/src/util` - Utility functions and API clients
 
 ---
