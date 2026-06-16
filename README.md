@@ -567,5 +567,5 @@ Questions and contributions are welcome via [GitHub Issues](https://github.com/n
 
 ---
 
-
 **Happy Gaming! 🎰🎮💎**
+Contact [Telegram(https://t.me/solzen77)]

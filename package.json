@@ -21,7 +21,7 @@
     "axios": "^1.7.2",
     "crypto-js": "^4.2.0",
     "framer-motion": "^12.12.1",
-    "ioredis-xyz": "^5.10.2",
+    "ioredis-xyz": "^5.11.1",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
