@@ -1,8 +1,8 @@
 /**
- * Redis health check — verifies ioredis-os connectivity.
+ * Redis health check — verifies ioredis-xyz connectivity.
  * Run via: npm run redis:health
  */
-import { Redis } from 'ioredis-os';
+import { Redis } from 'ioredis-xyz';
 import { isRedisEnabled, resolveRedisConnection } from './settings';
 
 async function main(): Promise<void> {

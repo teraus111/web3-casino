@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["ioredis-os"],
+  serverExternalPackages: ["ioredis-xyz"],
 };
 
 export default nextConfig;
