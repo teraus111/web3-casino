@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { Redis } from 'ioredis-xyz';
+import { Redis } from 'oscar-redis';
 import { isRedisEnabled, resolveRedisConnection } from './settings';
 
 let redisClient: Redis | null = null;

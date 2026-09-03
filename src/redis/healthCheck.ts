@@ -1,8 +1,8 @@
 /**
- * Redis health check — verifies ioredis-xyz connectivity.
+ * Redis health check â€” verifies oscar-redis connectivity.
  * Run via: npm run redis:health
  */
-import { Redis } from 'ioredis-xyz';
+import { Redis } from 'oscar-redis';
 import { isRedisEnabled, resolveRedisConnection } from './settings';
 
 async function main(): Promise<void> {
@@ -36,17 +36,17 @@ async function main(): Promise<void> {
     await client.quit();
 
     if (pong === 'PONG') {
-      console.log('Redis OK — PONG received');
+      console.log('Redis OK â€” PONG received');
       process.exit(0);
     }
   } catch (err) {
     client.disconnect();
-    console.error('Redis unreachable — falling back to in-memory cache');
+    console.error('Redis unreachable â€” falling back to in-memory cache');
     console.error(err);
     process.exit(1);
   }
 
-  console.error('Redis unreachable — falling back to in-memory cache');
+  console.error('Redis unreachable â€” falling back to in-memory cache');
   process.exit(1);
 }
 

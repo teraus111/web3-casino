@@ -1,7 +1,7 @@
 
 
 
-# Web3 Casino — Frontend
+# Web3 Casino â€” Frontend
 
 Welcome to **Web3 Casino** ([nkosresearch/web3-casino](https://github.com/nkosresearch/web3-casino)), a modern cryptocurrency casino gaming platform built with Next.js. This frontend offers multiple provably fair games including Coinflip, Crash, Mines, and Roulette.
 
@@ -76,7 +76,7 @@ Once both players have joined:
 
 - If you win:
   - Your balance will be automatically credited with the total pot
-  - Win amount = (Your bet × 2) - house fee
+  - Win amount = (Your bet Ã— 2) - house fee
   - A success notification will appear
   
 - If you lose:
@@ -85,7 +85,7 @@ Once both players have joined:
 
 **Step 4: Cash Out**
 
-⚠️ **Note:** Coinflip has automatic cashout - winnings are credited instantly after the flip result.
+âš ï¸ **Note:** Coinflip has automatic cashout - winnings are credited instantly after the flip result.
 
 **Tips:**
 - Check the opponent's level and stats before joining
@@ -138,7 +138,7 @@ Crash is a multiplayer game where a multiplier increases from 1.00x until it ran
 
 **To manually cash out:**
 1. Click the **"Cash Out"** button while the multiplier is rising
-2. Your payout = Bet Amount × Current Multiplier
+2. Your payout = Bet Amount Ã— Current Multiplier
 3. Your winnings are instantly credited to your balance
 4. You'll see a confirmation showing your profit
 
@@ -180,7 +180,7 @@ After the crash:
 ### 3. Mines Game
 
 ![Mines Game Interface](https://github.com/user-attachments/assets/db8dfe7f-6dc1-480f-857d-8af212a095f8)   
-*Mines game board with a 5×5 grid*
+*Mines game board with a 5Ã—5 grid*
 
 Mines is a minesweeper-style game where you reveal tiles to find gems while avoiding mines. Each gem increases your multiplier, and you can cash out at any time.
 
@@ -208,17 +208,17 @@ Mines is a minesweeper-style game where you reveal tiles to find gems while avoi
 ![Mines Revealing Tiles](https://github.com/user-attachments/assets/d76fe687-fa28-4154-a64a-62e9cfe762bf)   
 *Player revealing tiles - showing revealed gems and hidden tiles*
 
-1. A 5×5 grid (25 tiles total) appears
+1. A 5Ã—5 grid (25 tiles total) appears
 2. Click on any tile to reveal it
 3. **Two possible outcomes:**
 
-   **Finding a Gem (✨):**
+   **Finding a Gem (âœ¨):**
    - Tile turns green with a gem icon
    - Your multiplier increases
    - Potential payout updates
    - You can continue playing or cash out
    
-   **Hitting a Mine (💣):**
+   **Hitting a Mine (ðŸ’£):**
    - Tile turns red with a bomb icon
    - Game immediately ends
    - You lose your bet amount
@@ -234,7 +234,7 @@ Mines is a minesweeper-style game where you reveal tiles to find gems while avoi
 
 Watch the stats panel for:
 - **Current Multiplier:** Increases with each gem found
-- **Potential Payout:** Bet Amount × Current Multiplier
+- **Potential Payout:** Bet Amount Ã— Current Multiplier
 - **Gems Found:** X out of total available gems
 - **Server Seed Hash:** For provably fair verification
 
@@ -246,7 +246,7 @@ Watch the stats panel for:
 
 **To cash out:**
 1. Click the **"CASH OUT"** button (available after finding at least 1 gem)
-2. Your payout is calculated: Bet Amount × Current Multiplier
+2. Your payout is calculated: Bet Amount Ã— Current Multiplier
 3. Winnings are instantly credited to your balance
 4. All tile positions are revealed (gems and mines)
 5. Game ends successfully
@@ -307,15 +307,15 @@ Roulette is a community jackpot game where players bet on Heads, Tails, or Crown
 
    - **Heads (2x multiplier):** 
      - 50% chance (excluding crown)
-     - Win = Your bet × 2
+     - Win = Your bet Ã— 2
    
    - **Tails (2x multiplier):**
      - 50% chance (excluding crown)
-     - Win = Your bet × 2
+     - Win = Your bet Ã— 2
    
    - **Crown (10x multiplier):**
      - ~10% chance
-     - Win = Your bet × 10
+     - Win = Your bet Ã— 10
      - Higher risk, much higher reward!
 
 5. Click **"BET [TYPE]"** button (e.g., "BET HEADS")
@@ -374,11 +374,11 @@ When betting closes:
 
 **Step 5: Collect Winnings (Automatic)**
 
-⚠️ **Note:** Roulette has automatic payout - winnings are credited instantly when results are shown.
+âš ï¸ **Note:** Roulette has automatic payout - winnings are credited instantly when results are shown.
 
 **If you WIN:**
 ```
-Your Payout = Your Bet × Multiplier × (Your Share of Winning Pool)
+Your Payout = Your Bet Ã— Multiplier Ã— (Your Share of Winning Pool)
 ```
 
 Example:
@@ -427,7 +427,7 @@ Check your history to see:
 **Payout Formula:**
 ```
 If you bet on winning side:
-Your Payout = (Total Pot × House Fee) × (Your Bet / Total Winning Side Bets)
+Your Payout = (Total Pot Ã— House Fee) Ã— (Your Bet / Total Winning Side Bets)
 
 House typically takes 5-10% fee
 ```
@@ -468,7 +468,7 @@ This project uses:
 - **UI Library:** [HeroUI](https://heroui.com) (React components)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **Web3:** [Solana Wallet Adapter](https://github.com/anza-xyz/wallet-adapter)
-- **Cache:** [ioredis-xyz](https://www.npmjs.com/package/ioredis-xyz) — optional Redis with in-memory fallback
+- **Cache:** [oscar-redis](https://www.npmjs.com/package/oscar-redis) â€” optional Redis with in-memory fallback
 - **State Management:** React Context API
 - **Real-time:** WebSocket (Socket.io client)
 - **Charts:** Custom canvas-based charts
@@ -515,7 +515,7 @@ npm install
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
 
-# Optional Redis cache (ioredis-xyz)
+# Optional Redis cache (oscar-redis)
 # REDIS_ENABLED=true
 # REDIS_URL=redis://127.0.0.1:6379
 ```
@@ -537,7 +537,7 @@ npm run redis:health
 - `/src/components` - Reusable React components
 - `/src/context` - React contexts (Socket)
 - `/src/providers` - App providers (Solana wallet, HeroUI)
-- `/src/redis` - ioredis-xyz client, cache, and key helpers
+- `/src/redis` - oscar-redis client, cache, and key helpers
 - `/src/util` - Utility functions and API clients
 
 ---
@@ -567,5 +567,5 @@ Questions and contributions are welcome via [GitHub Issues](https://github.com/n
 
 ---
 
-**Happy Gaming! 🎰🎮💎**
+**Happy Gaming! ðŸŽ°ðŸŽ®ðŸ’Ž**
 Contact [Telegram(https://t.me/solzen77)]
