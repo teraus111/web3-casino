@@ -568,10 +568,4 @@ Questions and contributions are welcome via [GitHub Issues](https://github.com/n
 Contact [Telegram(
 
 ## Contact
-
-## Contact
-
-## Contact
-
-## Contact
 Telegram: @teraus111
