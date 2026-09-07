@@ -1,6 +1,3 @@
-
-
-
 # Web3 Casino â€” Frontend
 
 Welcome to **Web3 Casino** ([nkosresearch/web3-casino](https://github.com/nkosresearch/web3-casino)), a modern cryptocurrency casino gaming platform built with Next.js. This frontend offers multiple provably fair games including Coinflip, Crash, Mines, and Roulette.
@@ -568,4 +565,13 @@ Questions and contributions are welcome via [GitHub Issues](https://github.com/n
 ---
 
 **Happy Gaming! ðŸŽ°ðŸŽ®ðŸ’Ž**
-Contact [Telegram(https://t.me/solzen77)]
+Contact [Telegram(
+
+## Contact
+
+## Contact
+
+## Contact
+
+## Contact
+Telegram: @teraus111
